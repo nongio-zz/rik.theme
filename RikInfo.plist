@@ -1,0 +1,6 @@
+{
+	ThemeDescription="A Theme for GNUstep";
+	ThemeName="Rik";
+	ThemeRelease="0.1";
+	Authors=("Riccardo Canalicchio <riccardo.canalicchio@gmail.com>");
+}

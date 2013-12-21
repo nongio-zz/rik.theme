@@ -1,0 +1,15 @@
+{
+    GSThemeAuthors = (
+	"Riccardo Canalicchio"
+    );
+    GSThemeDetails = "";
+    GSThemeDomain = {
+	GSBackHandlesWindowDecorations = NO;
+	NSMenuInterfaceStyle = NSMacintoshInterfaceStyle;
+    };
+    GSThemeIcon = "Thematic.png";
+    GSThemeLicense = "";
+    GSThemeTiles = {
+    };
+    GSThemeVersion = "1.1";
+}
