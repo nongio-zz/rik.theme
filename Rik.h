@@ -5,3 +5,6 @@
 @interface Rik: GSTheme
 + (NSColor *) controlStrokeColor;
 @end
+
+
+#import "Rik+Drawings.h"

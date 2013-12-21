@@ -13,6 +13,7 @@ Rik_OBJC_FILES = \
 		Rik+Drawings.m\
 		Rik+Button.m\
 		Rik+WindowDecoration.m\
+		Rik+Menu.m\
 		GSStandardDecorationView+Rik.m\
 		NSWindow+Rik.m\
 		RikWindowButton.m\

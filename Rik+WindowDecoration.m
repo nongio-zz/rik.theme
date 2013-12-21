@@ -1,6 +1,4 @@
 #import "Rik.h"
-#include <AppKit/AppKit.h>
-#import <Foundation/NSUserDefaults.h>
 
 @interface Rik(RikWindowDecoration)
 
