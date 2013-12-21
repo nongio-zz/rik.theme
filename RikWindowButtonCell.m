@@ -17,8 +17,8 @@
     }
   NSColor* gradientDownColor1 = [bc highlightWithLevel: luminosity];
   NSColor* gradientDownColor2 = [bc colorWithAlphaComponent: 0];
-  NSColor* shadowColor1 = [bc shadowWithLevel: 0.5];
-  NSColor* shadowColor2 = [bc shadowWithLevel: 0.8];
+  NSColor* shadowColor1 = [bc shadowWithLevel: 0.4];
+  NSColor* shadowColor2 = [bc shadowWithLevel: 0.6];
   NSColor* gradientStrokeColor2 = [shadowColor1 highlightWithLevel: luminosity];
   NSColor* gradientUpColor1 = [bc highlightWithLevel: luminosity+0.2];
   NSColor* gradientUpColor2 = [gradientUpColor1 colorWithAlphaComponent: 0.5];
