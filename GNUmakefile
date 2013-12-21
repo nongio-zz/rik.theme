@@ -14,10 +14,14 @@ Rik_OBJC_FILES = \
 		Rik+Button.m\
 		Rik+WindowDecoration.m\
 		Rik+Menu.m\
+		Rik+Slider.m\
+		Rik+ProgressIndicator.m\
 		GSStandardDecorationView+Rik.m\
+		NSSlider+Rik.m\
 		NSWindow+Rik.m\
 		RikWindowButton.m\
-		RikWindowButtonCell.m
+		RikWindowButtonCell.m\
+		RikScrollerKnobSlotCell.m
 
 ADDITIONAL_TOOL_LIBS = -lopal
 $(BUNDLE_NAME)_RESOURCE_FILES = \
