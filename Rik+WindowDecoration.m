@@ -24,7 +24,7 @@ static NSDictionary *titleTextAttributes[3] = {nil, nil, nil};
     return TITLE_HEIGHT;
 }
 
-- (void) drawbackground: (NSRect) frame view: (NSView*) view
+- (void) drawWindowBackground: (NSRect) frame view: (NSView*) view
 {
   //TODO this color should be taken from thematic?
   NSColor* backgroundColor = [NSColor colorWithCalibratedRed: 0.93
@@ -81,6 +81,7 @@ static NSDictionary *titleTextAttributes[3] = {nil, nil, nil};
               forStyleMask: styleMask
               state: inputState
               andTitle: title];
+
     }
 }
 
@@ -157,7 +158,7 @@ static NSDictionary *titleTextAttributes[3] = {nil, nil, nil};
   [borderColor setStroke];
   [gradient drawInBezierPath: titleBarPath angle: -90];
   [titleBarPath setLineWidth: 1];
-//  [titleBarPath stroke];
+  [titleBarPath stroke];
   [linePath setLineWidth: 1];
   [linePath stroke];
 }
