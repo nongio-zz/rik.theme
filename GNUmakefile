@@ -12,7 +12,11 @@ Rik_OBJC_FILES = \
 		Rik.m\
 		Rik+Drawings.m\
 		Rik+Button.m\
-		Rik+WindowDecoration.m
+		Rik+WindowDecoration.m\
+		GSStandardDecorationView+Rik.m\
+		NSWindow+Rik.m\
+		RikWindowButton.m\
+		RikWindowButtonCell.m
 
 ADDITIONAL_TOOL_LIBS = -lopal
 $(BUNDLE_NAME)_RESOURCE_FILES = \
