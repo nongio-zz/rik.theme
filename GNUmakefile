@@ -11,7 +11,8 @@ Rik_PRINCIPAL_CLASS = Rik
 Rik_OBJC_FILES = \
 		Rik.m\
 		Rik+Drawings.m\
-		Rik+Button.m
+		Rik+Button.m\
+		Rik+WindowDecoration.m
 
 ADDITIONAL_TOOL_LIBS = -lopal
 $(BUNDLE_NAME)_RESOURCE_FILES = \
