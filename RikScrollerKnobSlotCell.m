@@ -11,12 +11,14 @@
 {
   if (NSIsEmptyRect(cellFrame))
     return;
-//  [self drawBallWithRect: cellFrame];
 
-  NSColor * baseColor = [NSColor whiteColor];
+  NSColor * baseColor = [NSColor colorWithCalibratedRed: 0.95
+                                                  green: 0.95
+                                                   blue: 0.95
+                                                  alpha: 1.0];
 //  if([self backgroundColor])
 //    baseColor = [self backgroundColor];
-  NSColor *shadowColor = [baseColor shadowWithLevel: 0.05];
+  NSColor *shadowColor = [baseColor shadowWithLevel: 0.06];
   NSGradient* gr = [[NSGradient alloc] initWithColorsAndLocations:
       shadowColor, 1.0,
       baseColor, 0.7,
@@ -28,6 +30,6 @@
   if(horizontal)
     a = 90;
   [gr drawInRect: cellFrame angle: a];
-  //[self drawInteriorWithFrame: cellFrame inView: controlView];
+//[self drawInteriorWithFrame: cellFrame inView: controlView];
 }
 @end

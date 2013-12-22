@@ -1,7 +1,4 @@
-
 #import <AppKit/NSButtonCell.h>
-
-
 
 @interface RikScrollerKnobSlotCell : NSButtonCell
 {

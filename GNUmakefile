@@ -25,7 +25,9 @@ Rik_OBJC_FILES = \
 		NSSegmentedCell+Rik.m\
 		RikWindowButton.m\
 		RikWindowButtonCell.m\
-		RikScrollerKnobSlotCell.m
+		RikScrollerKnobCell.m\
+		RikScrollerKnobSlotCell.m\
+		NSBrowserCell+Rik.m
 
 ADDITIONAL_TOOL_LIBS =
 $(BUNDLE_NAME)_RESOURCE_FILES = \

@@ -1,4 +1,5 @@
 #include "Rik.h"
+#include "RikScrollerKnobCell.h"
 #include "RikScrollerKnobSlotCell.h"
 
 @interface Rik(RikScroller)
@@ -68,15 +69,15 @@
 {
   NSButtonCell	*cell;
 
-  cell = [NSButtonCell new];
+  cell = [RikScrollerKnobCell new];
   [cell setButtonType: NSMomentaryChangeButton];
   [cell setBezelStyle: NSRoundedBezelStyle];
-	  [cell setImagePosition: NSImageOnly];
+  [cell setImagePosition: NSImageOnly];
 
   NSColor* bc = [NSColor colorWithCalibratedRed: 0.4
-                                                         green: 0.4
-                                                          blue: 0.4
-                                                         alpha: 1];
+                                          green: 0.4
+                                           blue: 0.4
+                                          alpha: 1];
   [cell setTitle: @""];
   if (horizontal)
     {
@@ -159,43 +160,6 @@
     }
   return NO;
 }
-//NOT TOUCHED
-- (void) drawScrollerRect: (NSRect)rect
-		   inView: (NSView *)view
-		  hitPart: (NSScrollerPart)hitPart
-	     isHorizontal: (BOOL)isHorizontal
-{
-  NSRect rectForPartIncrementLine;
-  NSRect rectForPartDecrementLine;
-  NSRect rectForPartKnobSlot;
-  NSScroller *scroller = (NSScroller *)view;
-
-  rectForPartIncrementLine = [scroller rectForPart: NSScrollerIncrementLine];
-  rectForPartDecrementLine = [scroller rectForPart: NSScrollerDecrementLine];
-  rectForPartKnobSlot = [scroller rectForPart: NSScrollerKnobSlot];
-
-  /*
-  [[[view window] backgroundColor] set];
-  NSRectFill (rect);
-  */
-
-  if (NSIntersectsRect (rect, rectForPartKnobSlot) == YES)
-    {
-      [scroller drawKnobSlot];
-      [scroller drawKnob];
-    }
-
-  if (NSIntersectsRect (rect, rectForPartDecrementLine) == YES)
-    {
-      [scroller drawArrow: NSScrollerDecrementArrow 
-		highlight: hitPart == NSScrollerDecrementLine];
-    }
-  if (NSIntersectsRect (rect, rectForPartIncrementLine) == YES)
-    {
-      [scroller drawArrow: NSScrollerIncrementArrow 
-		highlight: hitPart == NSScrollerIncrementLine];
-    }
-}
 
 - (void) drawKnobInCell: (NSCell *)cell
 {
@@ -211,53 +175,5 @@
                                               blue: 0.9
                                              alpha: 1];
   [self drawCircularBezel:r  withColor: color];
-}
-- (void) drawCircularBezel: (NSRect)cellFrame withColor: (NSColor*)backgroundColor
-{
-  //// Color Declarations
-  NSColor* strokeColorButton = [NSColor colorWithCalibratedRed: 0.4
-                                                         green: 0.4
-                                                          blue: 0.4
-                                                         alpha: 1];
-
-  //// Gradient Declarations
-  NSGradient* buttonBackgroundGradient = [self _bezelGradientWithColor:
-    backgroundColor];
-
-  //// Abstracted Attributes
-  CGFloat roundedRectangleStrokeWidth = 1;
-
-  float radius = NSHeight(cellFrame) / 2.0;
-  cellFrame = NSInsetRect(cellFrame, 1.0, 1.0);
-  float circle_radius = MIN(NSWidth(cellFrame), NSHeight(cellFrame)) / 2;
-  cellFrame = NSMakeRect( cellFrame.origin.x + cellFrame.size.width/2.0 - circle_radius,
-                          cellFrame.origin.y,
-                          circle_radius*2,
-                          circle_radius*2);
-
-  NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect: cellFrame
-                                                                       xRadius: radius
-                                                                       yRadius: radius];
-  [buttonBackgroundGradient drawInBezierPath: roundedRectanglePath angle: -90];
-  [strokeColorButton setStroke];
-  [roundedRectanglePath setLineWidth: roundedRectangleStrokeWidth];
-  [roundedRectanglePath stroke];
-
-}
-- (NSGradient *) _bezelGradientWithColor:(NSColor*) baseColor
-{
-  baseColor = [baseColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-
-  NSColor* baseColorLight = [baseColor highlightWithLevel: 0.8];
-  NSColor* baseColorLight2 = [baseColor highlightWithLevel: 0.5];
-  NSColor* baseColorShadow = [baseColor shadowWithLevel: 0.1];
-
-  NSGradient* gradient = [[NSGradient alloc] initWithColorsAndLocations:
-      baseColorLight, 0.0,
-      baseColor, 0.30,
-      baseColor, 0.49,
-      baseColorLight2, 0.50,
-      nil];
-  return gradient;
 }
 @end

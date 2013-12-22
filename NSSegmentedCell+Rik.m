@@ -56,6 +56,6 @@
 // i want to draw the border for last
   [self drawInteriorWithFrame: cellFrame inView: controlView];
   [self _drawBorderAndBackgroundWithFrame: cellFrame inView: controlView];
-  //[self _drawFocusRingWithFrame: cellFrame inView: controlView];
+  [self _drawFocusRingWithFrame: cellFrame inView: controlView];
 }
 @end
