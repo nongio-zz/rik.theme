@@ -20,6 +20,8 @@ Rik_OBJC_FILES = \
 		Rik+ColorWell.m\
 		Rik+Stepper.m\
 		Rik+Segmented.m\
+		Rik+Browser.m\
+		Rik+Table.m\
 		GSStandardDecorationView+Rik.m\
 		NSWindow+Rik.m\
 		NSSegmentedCell+Rik.m\
