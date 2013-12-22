@@ -161,19 +161,4 @@
   return NO;
 }
 
-- (void) drawKnobInCell: (NSCell *)cell
-{
-  NSView *controlView = [cell controlView];
-  NSSliderCell *sliderCell = (NSSliderCell *)cell;
-  NSRect r = 	[sliderCell knobRectFlipped: [controlView isFlipped]];
-  r.size.height += 4;
-  r.size.width += 4;
-  r.origin.x -= 2;
-  r.origin.y -= 2;
-  NSColor	*color = [NSColor colorWithCalibratedRed: 0.9
-                                             green: 0.9
-                                              blue: 0.9
-                                             alpha: 1];
-  [self drawCircularBezel:r  withColor: color];
-}
 @end
