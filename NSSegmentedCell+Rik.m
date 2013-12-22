@@ -44,8 +44,8 @@
         }
       offsetX += frame.size.width;
       offsetX = floor(offsetX) + 0.5;
-      [linesPath moveToPoint: NSMakePoint(offsetX, NSMinY(frame))];
-      [linesPath lineToPoint: NSMakePoint(offsetX, NSMaxY(frame))];
+      [linesPath moveToPoint: NSMakePoint(offsetX, NSMinY(frame) + 3)];
+      [linesPath lineToPoint: NSMakePoint(offsetX, NSMaxY(frame) - 3)];
     }
   [linesPath stroke];
 }
