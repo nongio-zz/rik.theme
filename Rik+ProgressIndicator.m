@@ -160,7 +160,7 @@ static NSImage *spinningImages[MaxCount];
 
 - (NSRect) drawProgressIndicatorBezel: (NSRect)bounds withClip: (NSRect) rect
 {
-    return [self drawGrayBezel: bounds withClip: rect];
+    return [self drawInnerGrayBezel: bounds withClip: rect];
 }
 
 - (void) drawProgressIndicatorBarDeterminate: (NSRect)bounds withOrientation:(BOOL) isVertical

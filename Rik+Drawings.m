@@ -86,6 +86,36 @@ NSRoundRectFill(NSRect r, float radius)
 
 - (NSRect) drawGrayBezel: (NSRect)border withClip: (NSRect)clip
 {
+  //// Color Declarations
+  NSColor* background = [NSColor colorWithCalibratedRed: 0.898 green: 0.898 blue: 0.898 alpha: 1];
+  NSColor* strokeDark = [NSColor colorWithCalibratedRed: 0.659 green: 0.659 blue: 0.659 alpha: 1];
+  NSColor* strokeLight = [NSColor colorWithCalibratedRed: 0.863 green: 0.863 blue: 0.863 alpha: 1];
+
+  //// Gradient Declarations
+  NSGradient* strokeGradient = [[NSGradient alloc] initWithColorsAndLocations:
+      strokeDark, 0.0,
+      [NSColor colorWithCalibratedRed: 0.761 green: 0.761 blue: 0.761 alpha: 1], 0.82,
+      strokeLight, 1.0, nil];
+
+  //// Frames
+  NSRect strokeRect = NSMakeRect(NSMinX(border), NSMinY(border), NSWidth(border), NSHeight(border));
+  NSRect fillRect = NSInsetRect(strokeRect, 1, 1);
+
+
+  //// stroke Drawing
+  NSBezierPath* strokePath = [NSBezierPath bezierPathWithRect:strokeRect];
+  [strokeGradient drawInBezierPath: strokePath angle: 90];
+
+
+  //// fill Drawing
+  NSBezierPath* fillPath = [NSBezierPath bezierPathWithRect:fillRect];
+  [background setFill];
+  [fillPath fill];
+
+  return NSInsetRect(border, 1, 1);
+}
+- (NSRect) drawInnerGrayBezel: (NSRect)border withClip: (NSRect)clip
+{
   //TODO use these colors...
   NSColor *black = [NSColor controlDarkShadowColor];
   NSColor *dark = [NSColor controlShadowColor];
