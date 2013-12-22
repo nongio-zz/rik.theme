@@ -17,6 +17,7 @@ Rik_OBJC_FILES = \
 		Rik+Slider.m\
 		Rik+ProgressIndicator.m\
 		Rik+Scroller.m\
+		Rik+ColorWell.m\
 		GSStandardDecorationView+Rik.m\
 		NSSlider+Rik.m\
 		NSWindow+Rik.m\
