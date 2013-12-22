@@ -1,7 +1,6 @@
 #import "Rik.h"
 
 #import <AppKit/AppKit.h>
-#import <CoreGraphics/CGContext.h>
 #import <GNUstepGUI/GSWindowDecorationView.h>
 
 @implementation Rik
