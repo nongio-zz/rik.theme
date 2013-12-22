@@ -19,8 +19,10 @@ Rik_OBJC_FILES = \
 		Rik+Scroller.m\
 		Rik+ColorWell.m\
 		Rik+Stepper.m\
+		Rik+Segmented.m\
 		GSStandardDecorationView+Rik.m\
 		NSWindow+Rik.m\
+		NSSegmentedCell+Rik.m\
 		RikWindowButton.m\
 		RikWindowButtonCell.m\
 		RikScrollerKnobSlotCell.m
