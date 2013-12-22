@@ -24,7 +24,7 @@ Rik_OBJC_FILES = \
 		RikWindowButtonCell.m\
 		RikScrollerKnobSlotCell.m
 
-ADDITIONAL_TOOL_LIBS = -lopal
+ADDITIONAL_TOOL_LIBS =
 $(BUNDLE_NAME)_RESOURCE_FILES = \
 	./Resources/ThemeImages\
 	./Resources/*.clr
