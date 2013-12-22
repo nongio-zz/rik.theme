@@ -24,12 +24,8 @@ static NSDictionary *titleTextAttributes[3] = {nil, nil, nil};
 
 - (void) drawWindowBackground: (NSRect) frame view: (NSView*) view
 {
-  //TODO this color should be taken from thematic?
-  NSColor* backgroundColor = [NSColor colorWithCalibratedRed: 0.93
-                                                       green: 0.93
-                                                        blue: 0.93
-                                                       alpha: 1];
 
+  NSColor* backgroundColor = [[view window] backgroundColor];
   NSColor *borderColor = [Rik controlStrokeColor];
 
   //i want to draw over the resize bar
