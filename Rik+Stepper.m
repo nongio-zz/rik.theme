@@ -8,10 +8,10 @@
 - (NSRect) stepperUpButtonRectWithFrame: (NSRect)frame
 {
   NSRect upRect = frame;
-  upRect.size.width = 12;
+  upRect.size.width = 13;
   upRect.size.height = 12;
-  upRect.origin.x += 1.5;
-  upRect.origin.y = NSMinY(frame) + 11;
+  upRect.origin.x = frame.origin.x + frame.size.width/2 - 6.5;
+  upRect.origin.y = frame.origin.y + frame.size.height/2-1;
   return upRect;
 }
 
@@ -19,10 +19,10 @@
 {
 
   NSRect upRect = frame;
-  upRect.size.width = 12;
+  upRect.size.width = 13;
   upRect.size.height = 12;
-  upRect.origin.x += 1.5;
-  upRect.origin.y = NSMinY(frame);
+  upRect.origin.x = frame.origin.x + frame.size.width/2 - 6.5;
+  upRect.origin.y = frame.origin.y + frame.size.height/2 - 11;
   return upRect;
 }
 
@@ -38,7 +38,7 @@
 - (void) drawStepperUpButton: (NSRect)aRect
 {
   NSImage *image = [NSImage imageNamed: @"common_ArrowUp"];
-  [image drawInRect: NSInsetRect(aRect, 3, 3)
+  [image drawInRect: NSInsetRect(aRect, 4, 4)
 	   fromRect: NSZeroRect
 	  operation: NSCompositeSourceOver
 	   fraction: 1
@@ -49,7 +49,7 @@
 - (void) drawStepperHighlightUpButton: (NSRect)aRect
 {
   NSGradient * fillgradient = [self _buttonGradientWithColor:[NSColor selectedControlColor]];
-  CGFloat roundedRectangleCornerRadius = 4;
+  CGFloat roundedRectangleCornerRadius = 5;
   NSRect roundedRectangleRect = aRect;
   NSRect roundedRectangleInnerRect = NSInsetRect(roundedRectangleRect, roundedRectangleCornerRadius, roundedRectangleCornerRadius);
   NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPath];
@@ -60,7 +60,7 @@
   [roundedRectanglePath closePath];
   [fillgradient drawInBezierPath:roundedRectanglePath angle:90];
   NSImage *image = [NSImage imageNamed: @"common_ArrowUp"];
-  [image drawInRect: NSInsetRect(aRect, 3, 3)
+  [image drawInRect: NSInsetRect(aRect, 4, 4)
 	   fromRect: NSZeroRect
 	  operation: NSCompositeSourceOver
 	   fraction: 1
@@ -71,7 +71,7 @@
 - (void) drawStepperDownButton: (NSRect)aRect
 {
   NSImage *image = [NSImage imageNamed: @"common_ArrowDown"];
-  [image drawInRect: NSInsetRect(aRect, 3, 3)
+  [image drawInRect: NSInsetRect(aRect, 4, 4)
 	   fromRect: NSZeroRect
 	  operation: NSCompositeSourceOver
 	   fraction: 1
@@ -82,7 +82,7 @@
 - (void) drawStepperHighlightDownButton: (NSRect)aRect
 {
   NSGradient * fillgradient = [self _buttonGradientWithColor:[NSColor selectedControlColor]];
-  CGFloat roundedRectangleCornerRadius = 4;
+  CGFloat roundedRectangleCornerRadius = 5;
   NSRect roundedRectangleRect = aRect;
   NSRect roundedRectangleInnerRect = NSInsetRect(roundedRectangleRect, roundedRectangleCornerRadius, roundedRectangleCornerRadius);
   NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPath];
@@ -93,7 +93,7 @@
   [roundedRectanglePath closePath];
   [fillgradient drawInBezierPath:roundedRectanglePath angle:90];
   NSImage *image = [NSImage imageNamed: @"common_ArrowDown"];
-  [image drawInRect: NSInsetRect(aRect, 3, 3)
+  [image drawInRect: NSInsetRect(aRect, 4, 4)
 	   fromRect: NSZeroRect
 	  operation: NSCompositeSourceOver
 	   fraction: 1
@@ -109,9 +109,9 @@
   const NSRect upRect = [self stepperUpButtonRectWithFrame: cellFrame];
   const NSRect downRect = [self stepperDownButtonRectWithFrame: cellFrame];
 
-  NSRect frame = NSMakeRect(cellFrame.origin.x+2.5, cellFrame.origin.y+0.5, 11, 22);
+  NSRect frame = NSMakeRect(cellFrame.origin.x + cellFrame.size.width/2 - 6, cellFrame.origin.y + cellFrame.size.height/2 - 11, 13, 22);
 
-  CGFloat radius = 4;
+  CGFloat radius = 5;
   NSGradient * fillgradient = [self _buttonGradientWithColor:[NSColor controlBackgroundColor]];
   NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect:frame  xRadius: radius yRadius: radius];
   [fillgradient drawInBezierPath:roundedRectanglePath angle:90];
@@ -125,7 +125,7 @@
   else
     [self drawStepperDownButton: downRect];
 
-  NSColor* strokeColor = [NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 1];
+  NSColor* strokeColor = [Rik controlStrokeColor];
   [strokeColor setStroke];
   [roundedRectanglePath setLineWidth: 1];
   [roundedRectanglePath stroke];
