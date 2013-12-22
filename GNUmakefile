@@ -19,13 +19,12 @@ Rik_OBJC_FILES = \
 		Rik+Scroller.m\
 		Rik+ColorWell.m\
 		GSStandardDecorationView+Rik.m\
-		NSSlider+Rik.m\
 		NSWindow+Rik.m\
 		RikWindowButton.m\
 		RikWindowButtonCell.m\
 		RikScrollerKnobSlotCell.m
 
-ADDITIONAL_TOOL_LIBS = -lopal
+ADDITIONAL_TOOL_LIBS =
 $(BUNDLE_NAME)_RESOURCE_FILES = \
 	./Resources/ThemeImages\
 	./Resources/*.clr
