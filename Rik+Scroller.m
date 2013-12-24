@@ -93,10 +93,10 @@
 
 - (NSCell*) cellForScrollerKnobSlot: (BOOL)horizontal
 {
-  GSDrawTiles   *tiles;
-  NSButtonCell	*cell;
-  NSColor	*color;
-  NSString      *name;
+  GSDrawTiles   		*tiles;
+  RikScrollerKnobSlotCell	*cell;
+  NSColor			*color;
+  NSString      		*name;
 
   if (horizontal)
     {
