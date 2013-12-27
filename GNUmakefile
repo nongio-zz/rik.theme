@@ -12,6 +12,7 @@ Rik_OBJC_FILES = \
 		Rik.m\
 		Rik+Drawings.m\
 		Rik+Button.m\
+		Rik+FocusFrame.m\
 		Rik+WindowDecoration.m\
 		Rik+Menu.m\
 		Rik+Slider.m\

@@ -32,6 +32,15 @@
     }
   return color;
 }
+- (NSBezierPath *) _roundBezierPath: (NSRect) frame
+                withRadius:(CGFloat) radius
+{
+  frame = NSInsetRect(frame, 0.5, 0.5);
+  NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect: frame
+                                                                       xRadius: radius
+                                                                       yRadius: radius];
+  return roundedRectanglePath;
+}
 
 - (void) _drawRoundBezel: (NSRect)cellFrame
                withColor: (NSColor*)backgroundColor
@@ -42,10 +51,7 @@
 
   NSGradient* buttonBackgroundGradient = [self _bezelGradientWithColor: backgroundColor];
 
-  cellFrame = NSInsetRect(cellFrame, 0.5, 0.5);
-  NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect: cellFrame
-                                                                       xRadius: radius
-                                                                       yRadius: radius];
+  NSBezierPath* roundedRectanglePath = [self _roundBezierPath: cellFrame withRadius: radius];
   [buttonBackgroundGradient drawInBezierPath: roundedRectanglePath angle: -90];
   [strokeColorButton setStroke];
   [roundedRectanglePath setLineWidth: 1];
@@ -96,6 +102,63 @@
   NSColor * c = [NSColor controlBackgroundColor];
   [self _drawRoundBezel: border withColor: c];
 }
+
+- (NSBezierPath*) buttonBezierPathWithRect: (NSRect)frame andStyle: (int) style
+{
+  NSLog(@"buttonBezierPath");
+  NSBezierPath* bezierPath;
+  CGFloat r;
+  CGFloat x;
+  switch (style)
+    {
+      case NSRoundRectBezelStyle:
+        NSLog(@"NSRoundBezelStyle");
+        bezierPath = [self _roundBezierPath: frame
+                                 withRadius: 4];
+        break;
+      case NSTexturedRoundedBezelStyle:
+      case NSRoundedBezelStyle:
+        NSLog(@"NSRoundedBezelStyle");
+        r = MIN(frame.size.width, frame.size.height) / 2.0;
+        bezierPath = [self _roundBezierPath: frame
+                                 withRadius: r];
+        break;
+      case NSTexturedSquareBezelStyle:
+        frame = NSInsetRect(frame, 0, 1);
+      case NSSmallSquareBezelStyle:
+      case NSRegularSquareBezelStyle:
+      case NSShadowlessSquareBezelStyle:
+      case NSThickSquareBezelStyle:
+      case NSThickerSquareBezelStyle:
+        bezierPath = [NSBezierPath bezierPathWithRect: frame];
+        break;
+      case NSCircularBezelStyle:
+      case NSHelpButtonBezelStyle:
+        NSLog(@"NSCircularBezelStyle");
+        r = MIN(NSWidth(frame), NSHeight(frame)) / 2;
+        x = frame.origin.x + frame.size.width/2.0 - r;
+
+        frame = NSMakeRect( x,
+                            frame.origin.y,
+                            r*2,
+                            r*2);
+        bezierPath = [self _roundBezierPath: frame
+                                 withRadius: r];
+        break;
+      case NSDisclosureBezelStyle:
+      case NSRoundedDisclosureBezelStyle:
+      case NSRecessedBezelStyle:
+        r = MIN(frame.size.width, frame.size.height) / 2.0;
+        bezierPath = [self _roundBezierPath: frame
+                                  withRadius: r];
+        break;
+      default:
+        bezierPath = [self _roundBezierPath: frame
+                                  withRadius: 4];
+    }
+  return RETAIN(bezierPath);
+}
+
 - (void) drawButton: (NSRect) frame
 				 in: (NSCell*) cell
 			   view: (NSView*) view
