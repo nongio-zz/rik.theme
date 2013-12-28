@@ -135,7 +135,6 @@
   CGFloat radius = 5;
   frame = NSMakeRect(frame.origin.x + frame.size.width/2 - 6, frame.origin.y + frame.size.height/2 - 11, 13, 22);
   NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect:frame  xRadius: radius yRadius: radius];
-  NSLog(@"asdas");
   return RETAIN(roundedRectanglePath);
 }
 @end
