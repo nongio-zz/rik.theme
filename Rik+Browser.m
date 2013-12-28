@@ -51,7 +51,7 @@
 
 - (CGFloat) browserColumnSeparation
 {
-  return 0;
+  return 1;
 }
 
 - (CGFloat) browserVerticalPadding
