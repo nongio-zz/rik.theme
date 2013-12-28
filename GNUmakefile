@@ -30,6 +30,7 @@ Rik_OBJC_FILES = \
 		RikWindowButtonCell.m\
 		RikScrollerKnobCell.m\
 		RikScrollerKnobSlotCell.m\
+		RikScrollerArrowCell.m\
 		NSBrowserCell+Rik.m
 
 ADDITIONAL_TOOL_LIBS =

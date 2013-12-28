@@ -42,7 +42,6 @@
                                                                        yRadius: radius];
   return roundedRectanglePath;
 }
-
 - (void) _drawRoundBezel: (NSRect)cellFrame
                withColor: (NSColor*)backgroundColor
                andRadius: (CGFloat) radius
@@ -59,6 +58,18 @@
   [roundedRectanglePath stroke];
 }
 
+- (void) drawPathButton: (NSBezierPath*) path
+                     in: (NSCell*)cell
+			            state: (GSThemeControlState) state
+{
+  NSColor	*backgroundColor = [self buttonColorInCell: cell forState: state];
+  NSColor* strokeColorButton = [Rik controlStrokeColor];
+  NSGradient* buttonBackgroundGradient = [self _bezelGradientWithColor: backgroundColor];
+  [buttonBackgroundGradient drawInBezierPath: path angle: -90];
+  [strokeColorButton setStroke];
+  [path setLineWidth: 1];
+  [path stroke];
+}
 - (void) _drawRoundBezel: (NSRect)cellFrame withColor: (NSColor*)backgroundColor
 {
   [self _drawRoundBezel: cellFrame withColor: backgroundColor andRadius: 4];
@@ -81,27 +92,13 @@
               andRadius: circle_radius];
 }
 
-- (NSGradient *) _bezelGradientWithColor:(NSColor*) baseColor
-{
-  baseColor = [baseColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-
-  NSColor* baseColorLight = [baseColor highlightWithLevel: 0.8];
-  NSColor* baseColorLight2 = [baseColor highlightWithLevel: 0.5];
-  NSColor* baseColorShadow = [baseColor shadowWithLevel: 0.1];
-
-  NSGradient* gradient = [[NSGradient alloc] initWithColorsAndLocations:
-      baseColorLight, 0.0,
-      baseColor, 0.30,
-      baseColor, 0.49,
-      baseColorLight2, 0.50,
-      nil];
-  return gradient;
-}
 
 - (NSRect) drawButton: (NSRect)border withClip: (NSRect)clip
 {
+  NSLog(@"drawButton withClip...");
   NSColor * c = [NSColor controlBackgroundColor];
   [self _drawRoundBezel: border withColor: c];
+  return border;
 }
 
 - (NSBezierPath*) buttonBezierPathWithRect: (NSRect)frame andStyle: (int) style
@@ -159,7 +156,6 @@
     }
   return RETAIN(bezierPath);
 }
-
 - (void) drawButton: (NSRect) frame
 				 in: (NSCell*) cell
 			   view: (NSView*) view
@@ -171,10 +167,12 @@
   switch (style)
     {
       case NSRoundRectBezelStyle:
+  NSLog(@"drawButton NSRoundRectBezelStyle %@", NSStringFromRect(frame));
         [self _drawRoundBezel: frame withColor: color];
         break;
       case NSTexturedRoundedBezelStyle:
       case NSRoundedBezelStyle:
+  NSLog(@"drawButton NSRoundedBezelStyle");
         [self _drawRoundedBezel: frame withColor: color];
         break;
       case NSTexturedSquareBezelStyle:
@@ -222,9 +220,11 @@
       case NSDisclosureBezelStyle:
       case NSRoundedDisclosureBezelStyle:
       case NSRecessedBezelStyle:
+        NSLog(@"drawButton NSRecessedBezelStyle");
         [self _drawRoundBezel: frame withColor: color];
         break;
       default:
+        NSLog(@"drawButton default");
         [self _drawRoundBezel: frame withColor: color];
     }
 }
