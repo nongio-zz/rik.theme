@@ -4,7 +4,7 @@
 
 - (void) drawFocusFrame: (NSRect) frame view: (NSView*) view
 {
-  NSLog(@"%@", [view className]);
+  //NSLog(@"%@", [view className]);
   NSBezierPath * path;
   if([view class] == [NSButton class])
     {
@@ -59,22 +59,21 @@
 
       NSRect r = [(NSMatrix*) view cellFrameAtRow:row column: col];
 
-      NSLog(@"%@", [selectedCell className]);
       if([selectedCell class] == [NSButtonCell class])
       {
-        NSLog(@"is a button cell");
         NSImage * img = [selectedCell image];
-        if(img != nil)
+        if(img != nil && ![selectedCell isBordered])
         {
-          NSLog(@"image");
           NSSize s = [img size];
           s.width -= 2;
           s.height -= 2;
-          path = [NSBezierPath bezierPathWithRoundedRect: NSMakeRect(r.origin.x+1, r.origin.y+2, s.width, s.height) 
+          path = [NSBezierPath bezierPathWithRoundedRect: NSMakeRect(r.origin.x+1, r.origin.y+2, s.width, s.height)
                                                  xRadius: s.width/2.0
                                                  yRadius: s.height/2.0];
         }else{
-          return;
+          path = [NSBezierPath bezierPathWithRoundedRect: NSInsetRect(r, 1, 1)
+                                                 xRadius: 3
+                                                 yRadius: 3];
         }
       }else{
         return;
