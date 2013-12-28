@@ -17,7 +17,7 @@
   NSString	*name;
 
   cell = [NSButtonCell new];
-  [cell setBezelStyle: NSRegularSquareBezelStyle];
+  [cell setBezelStyle: NSRoundRectBezelStyle];
   if (horizontal)
     {
       if (arrow == NSScrollerDecrementArrow)
@@ -74,10 +74,6 @@
   [cell setBezelStyle: NSRoundedBezelStyle];
   [cell setImagePosition: NSImageOnly];
 
-  NSColor* bc = [NSColor colorWithCalibratedRed: 0.4
-                                          green: 0.4
-                                           blue: 0.4
-                                          alpha: 1];
   [cell setTitle: @""];
   if (horizontal)
     {
@@ -136,7 +132,7 @@
     }
   else
     {
-      defaultScrollerWidth = 12.0;
+      defaultScrollerWidth = 16.0;
     }
   return defaultScrollerWidth;
 }
