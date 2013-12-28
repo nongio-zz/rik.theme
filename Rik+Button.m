@@ -250,4 +250,27 @@
   [roundedRectanglePath setLineWidth: roundedRectangleStrokeWidth];
   [roundedRectanglePath stroke];
 }
+
+- (NSRect) drawDarkButton: (NSRect)border withClip: (NSRect)clip
+{
+  NSColor* strokeColorButton = [Rik controlStrokeColor];
+  NSColor* baseColor = [NSColor colorWithCalibratedRed: 0.75
+                                                 green: 0.75
+                                                  blue: 0.75
+                                                 alpha: 1];
+
+  NSColor* baseColorLight = [baseColor highlightWithLevel: 0.6];
+
+  NSGradient* buttonBackgroundGradient = [[NSGradient alloc] initWithColorsAndLocations:
+      baseColorLight, 1.0,
+      baseColor, 0.0, nil];
+  CGFloat roundedRectangleStrokeWidth = 1;
+  NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRect: border];
+  [buttonBackgroundGradient drawInBezierPath: roundedRectanglePath angle: -90];
+  [strokeColorButton setStroke];
+  [roundedRectanglePath setLineWidth: roundedRectangleStrokeWidth];
+//  [roundedRectanglePath stroke];
+  return border;
+
+}
 @end
