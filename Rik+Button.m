@@ -13,7 +13,8 @@
     {
       if (state == GSThemeNormalState)
         {
-          color = [NSColor controlBackgroundColor];
+          color = [[NSColor controlBackgroundColor] shadowWithLevel: 0.1];
+;
         }
       else if (state == GSThemeHighlightedState
 	       || state == GSThemeHighlightedFirstResponderState)
@@ -27,7 +28,7 @@
         }
       else
         {
-          color = [NSColor controlBackgroundColor];
+          color = [[NSColor controlBackgroundColor] shadowWithLevel: 0.1];
         }
     }
   return color;
