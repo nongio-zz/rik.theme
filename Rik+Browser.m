@@ -47,24 +47,6 @@
     {
       [browser loadColumnZero];
     }
-
-  // Draws titles
-  if ([browser isTitled])
-    {
-      int i;
-
-      for (i = [browser firstVisibleColumn];
-	   i <= [browser lastVisibleColumn];
-	   ++i)
-        {
-          NSRect titleRect = [browser titleFrameOfColumn: i];
-          if (NSIntersectsRect (titleRect, rect) == YES)
-            {
-              [browser drawTitleOfColumn: i
-                    inRect: titleRect];
-            }
-        }
-    }
 }
 
 - (CGFloat) browserColumnSeparation
