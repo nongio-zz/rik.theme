@@ -95,7 +95,6 @@
 
 - (NSRect) drawButton: (NSRect)border withClip: (NSRect)clip
 {
-  NSLog(@"drawButton withClip...");
   NSColor * c = [NSColor controlBackgroundColor];
   [self _drawRoundBezel: border withColor: c];
   return border;
@@ -103,20 +102,17 @@
 
 - (NSBezierPath*) buttonBezierPathWithRect: (NSRect)frame andStyle: (int) style
 {
-  NSLog(@"buttonBezierPath");
   NSBezierPath* bezierPath;
   CGFloat r;
   CGFloat x;
   switch (style)
     {
       case NSRoundRectBezelStyle:
-        NSLog(@"NSRoundBezelStyle");
         bezierPath = [self _roundBezierPath: frame
                                  withRadius: 4];
         break;
       case NSTexturedRoundedBezelStyle:
       case NSRoundedBezelStyle:
-        NSLog(@"NSRoundedBezelStyle");
         r = MIN(frame.size.width, frame.size.height) / 2.0;
         bezierPath = [self _roundBezierPath: frame
                                  withRadius: r];
@@ -132,7 +128,6 @@
         break;
       case NSCircularBezelStyle:
       case NSHelpButtonBezelStyle:
-        NSLog(@"NSCircularBezelStyle");
         r = MIN(NSWidth(frame), NSHeight(frame)) / 2;
         x = frame.origin.x + frame.size.width/2.0 - r;
 
@@ -167,12 +162,10 @@
   switch (style)
     {
       case NSRoundRectBezelStyle:
-  NSLog(@"drawButton NSRoundRectBezelStyle %@", NSStringFromRect(frame));
         [self _drawRoundBezel: frame withColor: color];
         break;
       case NSTexturedRoundedBezelStyle:
       case NSRoundedBezelStyle:
-  NSLog(@"drawButton NSRoundedBezelStyle");
         [self _drawRoundedBezel: frame withColor: color];
         break;
       case NSTexturedSquareBezelStyle:
@@ -220,11 +213,9 @@
       case NSDisclosureBezelStyle:
       case NSRoundedDisclosureBezelStyle:
       case NSRecessedBezelStyle:
-        NSLog(@"drawButton NSRecessedBezelStyle");
         [self _drawRoundBezel: frame withColor: color];
         break;
       default:
-        NSLog(@"drawButton default");
         [self _drawRoundBezel: frame withColor: color];
     }
 }
