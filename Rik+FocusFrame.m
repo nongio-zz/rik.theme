@@ -34,7 +34,6 @@
                 imageRect.size.height = r.size.height;
                 break;
             }
-            NSLog(@"imagwbutton not bordered");
             path = [NSBezierPath bezierPathWithRoundedRect: NSInsetRect(imageRect,2,1)
                                                   xRadius: 3
                                                   yRadius: 3];
