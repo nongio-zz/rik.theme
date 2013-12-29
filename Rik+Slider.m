@@ -1,10 +1,12 @@
-#include "Rik.h"
+#import "Rik.h"
 
-@interface Rik(RikSlider)
+@interface GSTheme()
 
+- (void) drawCircularBezel: (NSRect)cellFrame
+                 withColor: (NSColor*)backgroundColor;
 @end
 
-@implementation Rik(RikSlider)
+@implementation Rik (RikSlider)
 - (void) drawSliderBorderAndBackground: (NSBorderType)aType
 				 frame: (NSRect)cellFrame
 				inCell: (NSCell *)cell
