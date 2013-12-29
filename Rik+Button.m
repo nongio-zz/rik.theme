@@ -1,4 +1,5 @@
 #import "Rik.h"
+#import "Rik+Button.h"
 
 @implementation Rik(RikButton)
 

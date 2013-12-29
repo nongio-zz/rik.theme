@@ -12,13 +12,13 @@
 + (NSButton *) standardWindowButton: (NSWindowButton)button
                        forStyleMask: (NSUInteger) mask
 {
-  NSButton *newButton;
+  RikWindowButton *newButton;
 
   switch (button)
     {
       case NSWindowCloseButton:
         newButton = [[RikWindowButton alloc] init];
-        [(RikWindowButton*)newButton setBaseColor: [NSColor colorWithCalibratedRed: 0.698 green: 0.427 blue: 1.00 alpha: 1]];
+        [newButton setBaseColor: [NSColor colorWithCalibratedRed: 0.698 green: 0.427 blue: 1.00 alpha: 1]];
         [newButton setImage: [NSImage imageNamed: @"common_Close"]];
         [newButton setAlternateImage: [NSImage imageNamed: @"common_CloseH"]];
         [newButton setAction: @selector(performClose:)];
@@ -41,12 +41,12 @@
 
       case NSWindowToolbarButton:
         // FIXME
-        newButton = [[NSButton alloc] init];
+        newButton = [[RikWindowButton alloc] init];
         [newButton setAction: @selector(toggleToolbarShown:)];
         break;
       case NSWindowDocumentIconButton:
       default:
-        newButton = [[NSButton alloc] init];
+        newButton = [[RikWindowButton alloc] init];
         // FIXME
         break;
     }
