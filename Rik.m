@@ -8,9 +8,9 @@
 + (NSColor *) controlStrokeColor
 {
 
-  return RETAIN([NSColor colorWithCalibratedRed: 0.3
-                                          green: 0.3
-                                           blue: 0.3
+  return RETAIN([NSColor colorWithCalibratedRed: 0.4
+                                          green: 0.4
+                                           blue: 0.4
                                           alpha: 1]);
 }
 @end

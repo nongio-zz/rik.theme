@@ -1,6 +1,7 @@
 #include "Rik.h"
 #include "RikScrollerKnobCell.h"
 #include "RikScrollerKnobSlotCell.h"
+#include "RikScrollerArrowCell.h"
 
 @interface Rik(RikScroller)
 
@@ -13,11 +14,11 @@
 - (NSButtonCell*) cellForScrollerArrow: (NSScrollerArrow)arrow
 			    horizontal: (BOOL)horizontal
 {
-  NSButtonCell	*cell;
+  RikScrollerArrowCell	*cell;
   NSString	*name;
 
-  cell = [NSButtonCell new];
-  [cell setBezelStyle: NSRegularSquareBezelStyle];
+  cell = [RikScrollerArrowCell new];
+  [cell setBezelStyle: NSRoundRectBezelStyle];
   if (horizontal)
     {
       if (arrow == NSScrollerDecrementArrow)
@@ -25,18 +26,18 @@
 	  [cell setHighlightsBy:
 	    NSChangeBackgroundCellMask | NSContentsCellMask];
 	  [cell setImage: [NSImage imageNamed: @"common_ArrowLeft"]];
-	  [cell setAlternateImage: [NSImage imageNamed: @"common_ArrowLeftH"]];
 	  [cell setImagePosition: NSImageOnly];
           name = GSScrollerLeftArrow;
+    [cell setArrowType: RikScrollerArrowLeft];
 	}
       else
 	{
 	  [cell setHighlightsBy:
 	    NSChangeBackgroundCellMask | NSContentsCellMask];
-	  [cell setImage: [NSImage imageNamed: @"common_ArrowRight"]];
-	  [cell setAlternateImage: [NSImage imageNamed: @"common_ArrowRightH"]];
-	  [cell setImagePosition: NSImageOnly];
-          name = GSScrollerRightArrow;
+      [cell setImage: [NSImage imageNamed: @"common_ArrowRight"]];
+      [cell setImagePosition: NSImageOnly];
+      name = GSScrollerRightArrow;
+    [cell setArrowType: RikScrollerArrowRight];
 	}
     }
   else
@@ -45,19 +46,19 @@
 	{
 	  [cell setHighlightsBy:
 	    NSChangeBackgroundCellMask | NSContentsCellMask];
-	  [cell setImage: [NSImage imageNamed: @"common_ArrowUp"]];
-	  [cell setAlternateImage: [NSImage imageNamed: @"common_ArrowUpH"]];
-	  [cell setImagePosition: NSImageOnly];
-          name = GSScrollerUpArrow;
+      [cell setImage: [NSImage imageNamed: @"common_ArrowUp"]];
+      [cell setImagePosition: NSImageOnly];
+      name = GSScrollerUpArrow;
+    [cell setArrowType: RikScrollerArrowUp];
 	}
       else
 	{
 	  [cell setHighlightsBy:
 	    NSChangeBackgroundCellMask | NSContentsCellMask];
 	  [cell setImage: [NSImage imageNamed: @"common_ArrowDown"]];
-	  [cell setAlternateImage: [NSImage imageNamed: @"common_ArrowDownH"]];
 	  [cell setImagePosition: NSImageOnly];
           name = GSScrollerDownArrow;
+    [cell setArrowType: RikScrollerArrowDown];
 	}
     }
   [self setName: name forElement: cell temporary: YES];
@@ -74,10 +75,6 @@
   [cell setBezelStyle: NSRoundedBezelStyle];
   [cell setImagePosition: NSImageOnly];
 
-  NSColor* bc = [NSColor colorWithCalibratedRed: 0.4
-                                          green: 0.4
-                                           blue: 0.4
-                                          alpha: 1];
   [cell setTitle: @""];
   if (horizontal)
     {
@@ -127,37 +124,16 @@
 // REMEMBER THIS SETTING
 - (float) defaultScrollerWidth
 {
-  NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-  float defaultScrollerWidth;
-
-  if ([defs objectForKey: @"GSScrollerDefaultWidth"] != nil)
-    {
-      defaultScrollerWidth = [defs floatForKey: @"GSScrollerDefaultWidth"];
-    }
-  else
-    {
-      defaultScrollerWidth = 12.0;
-    }
-  return defaultScrollerWidth;
+  return 16.0;
 }
 
 - (BOOL) scrollViewUseBottomCorner
 {
-  NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-  if ([defs objectForKey: @"GSScrollViewUseBottomCorner"] != nil)
-    {
-      return [defs boolForKey: @"GSScrollViewUseBottomCorner"];
-    }
   return YES;
 }
 
 - (BOOL) scrollViewScrollersOverlapBorders
 {
-  NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-  if ([defs objectForKey: @"GSScrollViewScrollersOverlapBorders"] != nil)
-    {
-      return [defs boolForKey: @"GSScrollViewScrollersOverlapBorders"];
-    }
   return NO;
 }
 
