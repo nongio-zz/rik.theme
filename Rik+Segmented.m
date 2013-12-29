@@ -11,7 +11,7 @@
                          roundedLeft: (BOOL)roundedLeft
                         roundedRight: (BOOL)roundedRight
 {
-    NSColor * c = [NSColor controlBackgroundColor];
+    NSColor * c = [[NSColor controlBackgroundColor] shadowWithLevel: 0.1];
     NSGradient* normalButtongradient = [self _bezelGradientWithColor: c];
 
     NSColor* buttonStroke = [Rik controlStrokeColor];

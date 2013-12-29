@@ -10,7 +10,7 @@
   NSRect upRect = frame;
   upRect.size.width = 13;
   upRect.size.height = 12;
-  upRect.origin.x = frame.origin.x + frame.size.width/2 - 6.5;
+  upRect.origin.x = frame.origin.x + frame.size.width/2 - 6;
   upRect.origin.y = frame.origin.y + frame.size.height/2-1;
   return upRect;
 }
@@ -21,7 +21,7 @@
   NSRect upRect = frame;
   upRect.size.width = 13;
   upRect.size.height = 12;
-  upRect.origin.x = frame.origin.x + frame.size.width/2 - 6.5;
+  upRect.origin.x = frame.origin.x + frame.size.width/2 - 6;
   upRect.origin.y = frame.origin.y + frame.size.height/2 - 11;
   return upRect;
 }
@@ -129,5 +129,12 @@
   [strokeColor setStroke];
   [roundedRectanglePath setLineWidth: 1];
   [roundedRectanglePath stroke];
+}
+-(NSBezierPath *) stepperBezierPathWithFrame:(NSRect)frame
+{
+  CGFloat radius = 5;
+  frame = NSMakeRect(frame.origin.x + frame.size.width/2 - 6, frame.origin.y + frame.size.height/2 - 11, 13, 22);
+  NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect:frame  xRadius: radius yRadius: radius];
+  return RETAIN(roundedRectanglePath);
 }
 @end

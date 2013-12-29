@@ -19,6 +19,22 @@ NSRoundRectFill(NSRect r, float radius)
 
 @implementation Rik(RikDrawiungs)
 
+- (NSGradient *) _bezelGradientWithColor:(NSColor*) baseColor
+{
+  baseColor = [baseColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+
+  NSColor* baseColorLight = [baseColor highlightWithLevel: 0.8];
+  NSColor* baseColorLight2 = [baseColor highlightWithLevel: 0.5];
+  NSColor* baseColorShadow = [baseColor shadowWithLevel: 0.1];
+
+  NSGradient* gradient = [[NSGradient alloc] initWithColorsAndLocations:
+      baseColorLight, 0.0,
+      baseColor, 0.30,
+      baseColor, 0.49,
+      baseColorLight2, 0.50,
+      nil];
+  return gradient;
+}
 - (NSGradient *) _buttonGradientWithColor:(NSColor*) baseColor
 {
   baseColor = [baseColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];

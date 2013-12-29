@@ -3,10 +3,6 @@
 #import <AppKit/NSImage.h>
 
 
-@interface NSWindow(RikTheme)
-
-@end
-
 @implementation NSWindow(RikTheme)
 
 + (NSButton *) standardWindowButton: (NSWindowButton)button
@@ -23,7 +19,6 @@
         [newButton setAlternateImage: [NSImage imageNamed: @"common_CloseH"]];
         [newButton setAction: @selector(performClose:)];
         break;
-
       case NSWindowMiniaturizeButton:
         newButton = [[RikWindowButton alloc] init];
         [newButton setBaseColor: [NSColor colorWithCalibratedRed: 0.9 green: 0.7 blue: 0.3 alpha: 1]];

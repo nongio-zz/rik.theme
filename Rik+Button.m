@@ -14,7 +14,8 @@
     {
       if (state == GSThemeNormalState)
         {
-          color = [NSColor controlBackgroundColor];
+          color = [[NSColor controlBackgroundColor] shadowWithLevel: 0.1];
+;
         }
       else if (state == GSThemeHighlightedState
 	       || state == GSThemeHighlightedFirstResponderState)
@@ -28,12 +29,20 @@
         }
       else
         {
-          color = [NSColor controlBackgroundColor];
+          color = [[NSColor controlBackgroundColor] shadowWithLevel: 0.1];
         }
     }
   return color;
 }
-
+- (NSBezierPath *) _roundBezierPath: (NSRect) frame
+                withRadius:(CGFloat) radius
+{
+  frame = NSInsetRect(frame, 0.5, 0.5);
+  NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect: frame
+                                                                       xRadius: radius
+                                                                       yRadius: radius];
+  return roundedRectanglePath;
+}
 - (void) _drawRoundBezel: (NSRect)cellFrame
                withColor: (NSColor*)backgroundColor
                andRadius: (CGFloat) radius
@@ -43,16 +52,25 @@
 
   NSGradient* buttonBackgroundGradient = [self _bezelGradientWithColor: backgroundColor];
 
-  cellFrame = NSInsetRect(cellFrame, 0.5, 0.5);
-  NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect: cellFrame
-                                                                       xRadius: radius
-                                                                       yRadius: radius];
+  NSBezierPath* roundedRectanglePath = [self _roundBezierPath: cellFrame withRadius: radius];
   [buttonBackgroundGradient drawInBezierPath: roundedRectanglePath angle: -90];
   [strokeColorButton setStroke];
   [roundedRectanglePath setLineWidth: 1];
   [roundedRectanglePath stroke];
 }
 
+- (void) drawPathButton: (NSBezierPath*) path
+                     in: (NSCell*)cell
+			            state: (GSThemeControlState) state
+{
+  NSColor	*backgroundColor = [self buttonColorInCell: cell forState: state];
+  NSColor* strokeColorButton = [Rik controlStrokeColor];
+  NSGradient* buttonBackgroundGradient = [self _bezelGradientWithColor: backgroundColor];
+  [buttonBackgroundGradient drawInBezierPath: path angle: -90];
+  [strokeColorButton setStroke];
+  [path setLineWidth: 1];
+  [path stroke];
+}
 - (void) _drawRoundBezel: (NSRect)cellFrame withColor: (NSColor*)backgroundColor
 {
   [self _drawRoundBezel: cellFrame withColor: backgroundColor andRadius: 4];
@@ -75,27 +93,64 @@
               andRadius: circle_radius];
 }
 
-- (NSGradient *) _bezelGradientWithColor:(NSColor*) baseColor
-{
-  baseColor = [baseColor colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-
-  NSColor* baseColorLight = [baseColor highlightWithLevel: 0.8];
-  NSColor* baseColorLight2 = [baseColor highlightWithLevel: 0.5];
-  NSColor* baseColorShadow = [baseColor shadowWithLevel: 0.1];
-
-  NSGradient* gradient = [[NSGradient alloc] initWithColorsAndLocations:
-      baseColorLight, 0.0,
-      baseColor, 0.30,
-      baseColor, 0.49,
-      baseColorLight2, 0.50,
-      nil];
-  return gradient;
-}
 
 - (NSRect) drawButton: (NSRect)border withClip: (NSRect)clip
 {
   NSColor * c = [NSColor controlBackgroundColor];
   [self _drawRoundBezel: border withColor: c];
+  return border;
+}
+
+- (NSBezierPath*) buttonBezierPathWithRect: (NSRect)frame andStyle: (int) style
+{
+  NSBezierPath* bezierPath;
+  CGFloat r;
+  CGFloat x;
+  switch (style)
+    {
+      case NSRoundRectBezelStyle:
+        bezierPath = [self _roundBezierPath: frame
+                                 withRadius: 4];
+        break;
+      case NSTexturedRoundedBezelStyle:
+      case NSRoundedBezelStyle:
+        r = MIN(frame.size.width, frame.size.height) / 2.0;
+        bezierPath = [self _roundBezierPath: frame
+                                 withRadius: r];
+        break;
+      case NSTexturedSquareBezelStyle:
+        frame = NSInsetRect(frame, 0, 1);
+      case NSSmallSquareBezelStyle:
+      case NSRegularSquareBezelStyle:
+      case NSShadowlessSquareBezelStyle:
+      case NSThickSquareBezelStyle:
+      case NSThickerSquareBezelStyle:
+        bezierPath = [NSBezierPath bezierPathWithRect: frame];
+        break;
+      case NSCircularBezelStyle:
+      case NSHelpButtonBezelStyle:
+        r = MIN(NSWidth(frame), NSHeight(frame)) / 2;
+        x = frame.origin.x + frame.size.width/2.0 - r;
+
+        frame = NSMakeRect( x,
+                            frame.origin.y,
+                            r*2,
+                            r*2);
+        bezierPath = [self _roundBezierPath: frame
+                                 withRadius: r];
+        break;
+      case NSDisclosureBezelStyle:
+      case NSRoundedDisclosureBezelStyle:
+      case NSRecessedBezelStyle:
+        r = MIN(frame.size.width, frame.size.height) / 2.0;
+        bezierPath = [self _roundBezierPath: frame
+                                  withRadius: r];
+        break;
+      default:
+        bezierPath = [self _roundBezierPath: frame
+                                  withRadius: 4];
+    }
+  return RETAIN(bezierPath);
 }
 - (void) drawButton: (NSRect) frame
 				 in: (NSCell*) cell
@@ -186,5 +241,28 @@
   [strokeColorButton setStroke];
   [roundedRectanglePath setLineWidth: roundedRectangleStrokeWidth];
   [roundedRectanglePath stroke];
+}
+
+- (NSRect) drawDarkButton: (NSRect)border withClip: (NSRect)clip
+{
+  NSColor* strokeColorButton = [Rik controlStrokeColor];
+  NSColor* baseColor = [NSColor colorWithCalibratedRed: 0.75
+                                                 green: 0.75
+                                                  blue: 0.75
+                                                 alpha: 1];
+
+  NSColor* baseColorLight = [baseColor highlightWithLevel: 0.6];
+
+  NSGradient* buttonBackgroundGradient = [[NSGradient alloc] initWithColorsAndLocations:
+      baseColorLight, 1.0,
+      baseColor, 0.0, nil];
+  CGFloat roundedRectangleStrokeWidth = 1;
+  NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRect: border];
+  [buttonBackgroundGradient drawInBezierPath: roundedRectanglePath angle: -90];
+  [strokeColorButton setStroke];
+  [roundedRectanglePath setLineWidth: roundedRectangleStrokeWidth];
+//  [roundedRectanglePath stroke];
+  return border;
+
 }
 @end

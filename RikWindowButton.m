@@ -3,13 +3,9 @@
 
 @implementation RikWindowButton
 
-+ (void) initialize
++ (Class) cellClass
 {
-  if (self == [RikWindowButton class])
-    {
-      [self setVersion: 1];
-      [self setCellClass: [RikWindowButtonCell class]];
-    }
+  return [RikWindowButtonCell class];
 }
 - (void) setBaseColor: (NSColor*)c
 {

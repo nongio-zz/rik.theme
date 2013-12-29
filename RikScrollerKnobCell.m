@@ -15,13 +15,12 @@
                                                   green: 0.6
                                                    blue:0.6
                                                   alpha: 1.0];
-  cellFrame = NSInsetRect(cellFrame, 1, 1);
-  CGFloat radius = 4;
+  cellFrame = NSInsetRect(cellFrame, 2, 2);
+  CGFloat radius = 5;
   NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect: cellFrame
                                                                        xRadius: radius
                                                                        yRadius: radius];
   [baseColor setFill];
   [roundedRectanglePath fill];
-  
 }
 @end
