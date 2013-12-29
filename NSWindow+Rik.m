@@ -1,5 +1,6 @@
 #import <AppKit/NSWindow.h>
 #include "RikWindowButton.h"
+#import <AppKit/NSImage.h>
 
 
 @interface NSWindow(RikTheme)
