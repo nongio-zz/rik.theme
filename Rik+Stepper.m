@@ -1,8 +1,5 @@
 #import "Rik.h"
-
-@interface Rik(RikStepper)
-
-@end
+#import "Rik+Stepper.h"
 
 @implementation Rik(RikStepper)
 - (NSRect) stepperUpButtonRectWithFrame: (NSRect)frame
@@ -39,11 +36,11 @@
 {
   NSImage *image = [NSImage imageNamed: @"common_ArrowUp"];
   [image drawInRect: NSInsetRect(aRect, 4, 4)
-	   fromRect: NSZeroRect
-	  operation: NSCompositeSourceOver
-	   fraction: 1
+           fromRect: NSZeroRect
+          operation: NSCompositeSourceOver
+           fraction: 1
      respectFlipped: YES
-	      hints: nil];
+              hints: nil];
 }
 
 - (void) drawStepperHighlightUpButton: (NSRect)aRect
@@ -61,22 +58,22 @@
   [fillgradient drawInBezierPath:roundedRectanglePath angle:90];
   NSImage *image = [NSImage imageNamed: @"common_ArrowUp"];
   [image drawInRect: NSInsetRect(aRect, 4, 4)
-	   fromRect: NSZeroRect
-	  operation: NSCompositeSourceOver
-	   fraction: 1
+           fromRect: NSZeroRect
+          operation: NSCompositeSourceOver
+           fraction: 1
      respectFlipped: YES
-	      hints: nil];
+              hints: nil];
 }
 
 - (void) drawStepperDownButton: (NSRect)aRect
 {
   NSImage *image = [NSImage imageNamed: @"common_ArrowDown"];
   [image drawInRect: NSInsetRect(aRect, 4, 4)
-	   fromRect: NSZeroRect
-	  operation: NSCompositeSourceOver
-	   fraction: 1
+           fromRect: NSZeroRect
+          operation: NSCompositeSourceOver
+           fraction: 1
      respectFlipped: YES
-	      hints: nil];
+              hints: nil];
 }
 
 - (void) drawStepperHighlightDownButton: (NSRect)aRect
@@ -94,11 +91,11 @@
   [fillgradient drawInBezierPath:roundedRectanglePath angle:90];
   NSImage *image = [NSImage imageNamed: @"common_ArrowDown"];
   [image drawInRect: NSInsetRect(aRect, 4, 4)
-	   fromRect: NSZeroRect
-	  operation: NSCompositeSourceOver
-	   fraction: 1
+           fromRect: NSZeroRect
+          operation: NSCompositeSourceOver
+           fraction: 1
      respectFlipped: YES
-	      hints: nil];
+              hints: nil];
 }
 - (void) drawStepperCell: (NSCell*)cell
                withFrame: (NSRect)cellFrame
