@@ -31,7 +31,8 @@ Rik_OBJC_FILES = \
 		RikScrollerKnobCell.m\
 		RikScrollerKnobSlotCell.m\
 		RikScrollerArrowCell.m\
-		NSBrowserCell+Rik.m
+		NSBrowserCell+Rik.m\
+		NSSearchFieldCell+Rik.m
 
 ADDITIONAL_TOOL_LIBS =
 $(BUNDLE_NAME)_RESOURCE_FILES = \
