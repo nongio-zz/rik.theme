@@ -1,4 +1,5 @@
 #import "Rik.h"
+#import "Rik+Stepper.h"
 
 @implementation Rik(RikFocusFrame)
 
@@ -92,16 +93,16 @@
 - (NSSize) sizeForBorderType: (NSBorderType)aType
 {
       switch (aType)
-	{
-	  case NSLineBorder:
-	    return NSMakeSize(4, 4);
-	  case NSGrooveBorder:
-	  case NSBezelBorder:
-	    return NSMakeSize(4, 4);
-	  case NSNoBorder:
-	  default:
-	    return NSZeroSize;
-	}
+        {
+          case NSLineBorder:
+            return NSMakeSize(4, 4);
+          case NSGrooveBorder:
+          case NSBezelBorder:
+            return NSMakeSize(4, 4);
+          case NSNoBorder:
+          default:
+            return NSZeroSize;
+        }
 }
 
 @end
