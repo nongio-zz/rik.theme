@@ -1,3 +1,9 @@
+/**
+* Copyright (C) 2013 Alessandro Sangiuliano
+* Author: Alessandro Sangiuliano <alex22_7@hotmail.com>
+* Date: 31 December 2013
+*/
+
 #import "Rik.h"
 #import "NSSearchFieldCell+Rik.h"
 
@@ -24,7 +30,6 @@
 
   if (!_search_button_cell)
     {
-      // nothing to split off
       part = rect;
     }
   else
@@ -41,9 +46,7 @@
                                     inView: (NSView*)controlView
 {
 	CGFloat radius = cellFrame.size.height / 2.0;
-	//CGFloat width = cellFrame.size.width+2;
 	NSRect rect = cellFrame;
-	//rect.size.width = width;
 	NSBezierPath* roundedSearchFieldPath = [NSBezierPath bezierPathWithRoundedRect: rect
                                                                        xRadius: radius
                                                                        yRadius: radius];
@@ -56,7 +59,6 @@
 
 - (void) drawInteriorWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
 {	
-  //_textfieldcell_draws_background = NO;
   if (_cell.in_editing)
    [self _drawEditorWithFrame: cellFrame inView: controlView];
   else
