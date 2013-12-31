@@ -1,4 +1,4 @@
-#include <AppKit/AppKit.h>
+#import <AppKit/AppKit.h>
 #import <Foundation/NSUserDefaults.h>
 #import <GNUstepGUI/GSTheme.h>
 

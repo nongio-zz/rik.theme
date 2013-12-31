@@ -8,6 +8,7 @@
 
 - (void) drawWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
 {
+  NSRect frame = cellFrame;
   [_search_button_cell drawWithFrame: [self searchButtonRectForBounds: cellFrame] 
 		       inView: controlView];
   [super drawWithFrame: [self searchTextRectForBounds: cellFrame ] 
@@ -36,10 +37,28 @@
   return text;
 }
 
-- (void) drawInteriorWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
+- (void) _drawBorderAndBackgroundWithFrame: (NSRect)cellFrame 
+                                    inView: (NSView*)controlView
 {
+	CGFloat radius = cellFrame.size.height / 2.0;
+	//CGFloat width = cellFrame.size.width+2;
+	NSRect rect = cellFrame;
+	//rect.size.width = width;
+	NSBezierPath* roundedSearchFieldPath = [NSBezierPath bezierPathWithRoundedRect: rect
+                                                                       xRadius: radius
+                                                                       yRadius: radius];
+	[roundedSearchFieldPath setLineWidth: 0.2];
+	
+	[[NSColor whiteColor] setFill];
+	[roundedSearchFieldPath fill];
+	[roundedSearchFieldPath stroke];
+}
+
+- (void) drawInteriorWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
+{	
+  //_textfieldcell_draws_background = NO;
   if (_cell.in_editing)
-    [self _drawEditorWithFrame: cellFrame inView: controlView];
+   [self _drawEditorWithFrame: cellFrame inView: controlView];
   else
     {
       NSRect titleRect;
@@ -51,6 +70,49 @@
       _cell.type = NSTextCellType;
       titleRect = [self titleRectForBounds: cellFrame];
       [[self _drawAttributedString] drawInRect: titleRect];
+    }
+}
+
+- (void) _drawEditorWithFrame: (NSRect)cellFrame
+		       inView: (NSView *)controlView
+{
+  if ([controlView isKindOfClass: [NSControl class]])
+    {
+      /* Adjust the text editor's frame to match cell's frame (w/o border) */
+      NSRect titleRect = [self titleRectForBounds: cellFrame];
+      NSText *textObject = [(NSControl*)controlView currentEditor];
+      NSView *clipView = [textObject superview];
+
+      if ([clipView isKindOfClass: [NSClipView class]])
+	{
+	  [clipView setFrame: titleRect];
+	}
+      else
+	{
+	  [textObject setFrame: titleRect];
+	}
+    }
+}
+
+- (NSRect) titleRectForBounds: (NSRect)theRect
+{
+  if (_cell.type == NSTextCellType)
+    {
+      NSRect frame = [self drawingRectForBounds: theRect];
+      
+       //Add spacing between border and inside 
+      if (_cell.is_bordered || _cell.is_bezeled)
+        {
+          frame.origin.x += 3;
+          frame.size.width -= 14;
+          frame.origin.y -= 1;
+          frame.size.height += 1;
+        }
+      return frame;
+    }
+  else
+    {
+      return theRect;
     }
 }
 @end
