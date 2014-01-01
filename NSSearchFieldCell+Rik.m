@@ -6,6 +6,7 @@
 
 #import "Rik.h"
 #import "NSSearchFieldCell+Rik.h"
+#import "Rik+Button.h"
 
 #define ICON_WIDTH	16
 
@@ -24,9 +25,11 @@
 		       inView: controlView];
 }
 
+/* This method put the "x" cell inside the Text cell */
+
 - (NSRect) searchTextRectForBounds: (NSRect)rect
 {
-  NSRect search, text, clear, part;
+  NSRect search, text, part;
 
   if (!_search_button_cell)
     {
