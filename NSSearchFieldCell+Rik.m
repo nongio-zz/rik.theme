@@ -16,10 +16,9 @@
 - (void) drawWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
 {
   NSRect frame = cellFrame;
-  [_search_button_cell drawWithFrame: [self searchButtonRectForBounds: cellFrame] 
-		       inView: controlView];
   [super drawWithFrame: [self searchTextRectForBounds: cellFrame ] 
 	 inView: controlView];
+ [_search_button_cell drawWithFrame: [self searchButtonRectForBounds: cellFrame] inView: controlView];
   if ([[self stringValue] length] > 0)
     [_cancel_button_cell drawWithFrame: [self cancelButtonRectForBounds: cellFrame] 
 		       inView: controlView];
@@ -29,20 +28,23 @@
 
 - (NSRect) searchTextRectForBounds: (NSRect)rect
 {
-  NSRect search, text, part;
+	NSRect search, text, part;
 
-  if (!_search_button_cell)
-    {
-      part = rect;
-    }
-  else
-  {
-    NSDivideRect(rect, &search, &part, ICON_WIDTH, NSMinXEdge);
-  }
+	if (_search_button_cell)
+	{
+		part = rect;
+		/*set the right point and size*/
+		part.origin.x +=1;
+		part.size.width -= 1;
+	}
+	else
+	{
+		NSDivideRect(rect, &search, &part, ICON_WIDTH, NSMinXEdge);
+	}
 
-  text = part;
+	text = part;
 
-  return text;
+	return text;
 }
 
 - (void) _drawBorderAndBackgroundWithFrame: (NSRect)cellFrame 
@@ -50,13 +52,17 @@
 {
 	CGFloat radius = cellFrame.size.height / 2.0;
 	NSRect rect = cellFrame;
+	rect.origin.x -= 0.5;
+	rect.origin.y += 0.5;
+	rect.size.height -= 1;
+	//rect.size.width += 1;
 	NSBezierPath* roundedSearchFieldPath = [NSBezierPath bezierPathWithRoundedRect: rect
                                                                        xRadius: radius
                                                                        yRadius: radius];
-	[roundedSearchFieldPath setLineWidth: 0.2];
-	
+	[roundedSearchFieldPath setLineWidth:1.0];
 	[[NSColor whiteColor] setFill];
 	[roundedSearchFieldPath fill];
+	[[Rik controlStrokeColor] setStroke];
 	[roundedSearchFieldPath stroke];
 }
 
@@ -104,12 +110,11 @@
   if (_cell.type == NSTextCellType)
     {
       NSRect frame = [self drawingRectForBounds: theRect];
-      
        //Add spacing between border and inside 
       if (_cell.is_bordered || _cell.is_bezeled)
         {
-          frame.origin.x += 3;
-          frame.size.width -= 14;
+          frame.origin.x += 15;
+          frame.size.width -= 30;
           frame.origin.y -= 1;
           frame.size.height += 1;
         }
@@ -120,4 +125,23 @@
       return theRect;
     }
 }
+
+- (NSRect) searchButtonRectForBounds: (NSRect)rect;
+{
+  NSRect search, part;
+  NSDivideRect(rect, &search, &part, ICON_WIDTH, NSMinXEdge);
+  search.origin.x +=2;
+  return search;
+}
+
+
+- (NSRect) cancelButtonRectForBounds: (NSRect)rect
+{
+  NSRect part, clear;
+	
+  NSDivideRect(rect, &clear, &part, ICON_WIDTH, NSMaxXEdge);
+  clear.origin.x -= 2; //This set the position inside the textsearch box
+  return clear;
+}
+
 @end
