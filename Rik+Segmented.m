@@ -50,9 +50,9 @@
         buttonPath = [NSBezierPath bezierPathWithRect: button2Rect];
       }
     if(state == GSThemeSelectedState)
-      [buttonGradient drawInBezierPath: buttonPath angle: -90];
+      [buttonGradient drawInBezierPath: buttonPath angle: 90];
     else
-      [normalButtongradient drawInBezierPath: buttonPath angle: -90];
+      [normalButtongradient drawInBezierPath: buttonPath angle: 90];
 
 }
 @end
