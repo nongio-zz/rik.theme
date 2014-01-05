@@ -16,11 +16,11 @@
 - (void) drawWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
 {
   NSRect frame = cellFrame;
-  [super drawWithFrame: [self searchTextRectForBounds: cellFrame ] 
+  [super drawWithFrame: [self searchTextRectForBounds: cellFrame ]
 	 inView: controlView];
  [_search_button_cell drawWithFrame: [self searchButtonRectForBounds: cellFrame] inView: controlView];
   if ([[self stringValue] length] > 0)
-    [_cancel_button_cell drawWithFrame: [self cancelButtonRectForBounds: cellFrame] 
+    [_cancel_button_cell drawWithFrame: [self cancelButtonRectForBounds: cellFrame]
 		       inView: controlView];
 }
 
@@ -47,7 +47,7 @@
 	return text;
 }
 
-- (void) _drawBorderAndBackgroundWithFrame: (NSRect)cellFrame 
+- (void) _drawBorderAndBackgroundWithFrame: (NSRect)cellFrame
                                     inView: (NSView*)controlView
 {
 	CGFloat radius = cellFrame.size.height / 2.0;
@@ -67,7 +67,7 @@
 }
 
 - (void) drawInteriorWithFrame: (NSRect)cellFrame inView: (NSView*)controlView
-{	
+{
   if (_cell.in_editing)
    [self _drawEditorWithFrame: cellFrame inView: controlView];
   else
@@ -110,7 +110,7 @@
   if (_cell.type == NSTextCellType)
     {
       NSRect frame = [self drawingRectForBounds: theRect];
-       //Add spacing between border and inside 
+       //Add spacing between border and inside
       if (_cell.is_bordered || _cell.is_bezeled)
         {
           frame.origin.x += 15;
@@ -138,7 +138,7 @@
 - (NSRect) cancelButtonRectForBounds: (NSRect)rect
 {
   NSRect part, clear;
-	
+
   NSDivideRect(rect, &clear, &part, ICON_WIDTH, NSMaxXEdge);
   clear.origin.x -= 2; //This set the position inside the textsearch box
   return clear;
