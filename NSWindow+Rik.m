@@ -26,15 +26,19 @@
   [super setCurrentProgress: progress];
   if(defaultbuttoncell)
     {
-        NSNumber * n = [NSNumber numberWithFloat: progress];
         if(reverse)
         {
-          defaultbuttoncell.pulseProgress = [NSNumber numberWithFloat: 1.0 - [n floatValue]];
+          defaultbuttoncell.pulseProgress = [NSNumber numberWithFloat: 1.0 - progress];
         }else{
-          defaultbuttoncell.pulseProgress = n;
+          defaultbuttoncell.pulseProgress = [NSNumber numberWithFloat: progress];
         }
         [[defaultbuttoncell controlView] setNeedsDisplay: YES];
     }
+  if (progress >= 1.0)
+  {
+    reverse = !reverse;
+    [self startAnimation];
+  }
 }
 
 @end
@@ -79,7 +83,8 @@
 - (void)animation:(NSAnimation *)a
             didReachProgressMark:(NSAnimationProgress)progress
 {
-  [self startPulse: !animation.reverse];
+  //[animation stopAnimation];
+  //[self startPulse: !animation.reverse];
 }
 @end
 @implementation NSWindow(RikTheme)
@@ -134,7 +139,6 @@
 }
 - (void) setDefaultButtonCell: (NSButtonCell *)aCell
 {
-  NSLog(@"set default buttoncell");
   ASSIGN(_defaultButtonCell, aCell);
   _f.default_button_cell_key_disabled = NO;
 
