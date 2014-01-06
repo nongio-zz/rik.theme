@@ -1,10 +1,36 @@
 #import "Rik.h"
 #import "Rik+Button.h"
 
+
+NSString * const kRikIsDefaultButton = @"kRikIsDefaultButton";
+NSString * const kRikPulseProgressKey = @"kRikPulseProgressKey";
+
+@implementation NSButtonCell(RikDefaultButtonAnimation)
+- (void)setIsDefaultButton:(NSNumber*) val
+{
+  objc_setAssociatedObject(self, kRikIsDefaultButton, val, OBJC_ASSOCIATION_COPY);
+}
+
+- (NSNumber *) isDefaultButton
+{
+	return objc_getAssociatedObject(self, kRikIsDefaultButton);
+}
+- (BOOL)defaultButton
+{
+	return [[self isDefaultButton] boolValue];
+}
+- (void)setPulseProgress:(NSNumber *)pulseProgress
+{
+	objc_setAssociatedObject(self, kRikPulseProgressKey, pulseProgress, OBJC_ASSOCIATION_COPY);
+}
+
+- (NSNumber*)pulseProgress
+{
+	return objc_getAssociatedObject(self, kRikPulseProgressKey);
+}
+@end
+
 @implementation Rik(RikButton)
-
-
-- (NSColor*)  buttonColorInCell:(NSCell*) cell forState: (GSThemeControlState) state
 {
 
   NSColor	*color = nil;
@@ -15,7 +41,6 @@
       if (state == GSThemeNormalState)
         {
           color = [[NSColor controlBackgroundColor] shadowWithLevel: 0.1];
-;
         }
       else if (state == GSThemeHighlightedState
 	       || state == GSThemeHighlightedFirstResponderState)
