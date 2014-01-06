@@ -51,6 +51,14 @@
     {
       path = [self stepperBezierPathWithFrame: frame];
     }
+  else if([view class] == [NSPopUpButton class])
+    {
+      frame.size.height += 1;
+      frame.size.width += 1;
+      path = [NSBezierPath bezierPathWithRoundedRect: frame
+                                                  xRadius: 3
+                                                  yRadius: 3];
+    }
   else if([view class] == [NSMatrix class])
     {
       NSSize size = [(NSMatrix*) view cellSize];
