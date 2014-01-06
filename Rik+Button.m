@@ -31,6 +31,15 @@ NSString * const kRikPulseProgressKey = @"kRikPulseProgressKey";
 @end
 
 @implementation Rik(RikButton)
+- (NSColor*) pulseColorInCell:(NSButtonCell*) bc
+{
+  NSColor * color;
+  CGFloat pulse = [[bc pulseProgress] floatValue];
+  color = [NSColor colorWithCalibratedRed: 0.62 green: 0.82 blue: 0.965 alpha: 1];
+  color = [NSColor colorWithCalibratedHue: [color hueComponent] saturation: 1.0 - pulse*0.6 brightness: 0.9 + pulse*0.1 alpha: [color alphaComponent]];
+  return color;
+}
+- (NSColor*) buttonColorInCell:(NSCell*) cell forState: (GSThemeControlState) state
 {
 
   NSColor	*color = nil;
@@ -55,6 +64,15 @@ NSString * const kRikPulseProgressKey = @"kRikPulseProgressKey";
       else
         {
           color = [[NSColor controlBackgroundColor] shadowWithLevel: 0.1];
+        }
+    }
+    //PULSE ANIMATION COLOR IF IS PRESSED DONT ANIMATE..
+    if([cell class] == [NSButtonCell class] && state != GSThemeSelectedState)
+    {
+      NSButtonCell * bc = (NSButtonCell *)cell;
+      if(bc.isDefaultButton)
+        {
+          color = [self pulseColorInCell: bc];
         }
     }
   return color;
